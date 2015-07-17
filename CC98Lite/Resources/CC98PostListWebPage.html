@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <link rel="stylesheet" href="CC98PostListStyle.css" />
+        <script type="text/javascript" src="mootools.core.js"></script>
+        <script type="text/javascript" src="clientubb.js"></script>
+        <meta name="viewport" content="width=device-width, user-scalable=no" />
+    </head>
+    <body>
+        <div  class="bg-wrapper">
+            <a href="javascript:;" id="showAllImages"></a>
+            $foreach$
+            <div class="post">
+                <div class="post-info" onclick="showContextMenu(${i});">
+                    <img class="img-avatar" src="${avatar}" />
+                    <div class="name">${author}</div>
+                    <div class="gender"><small>${gender}</small></div><br />
+                    <div class="floor-num"><small>${floor}楼</small></div>
+                    <div class="time"><small>${time}</small></div><br />
+                </div>
+                <div class="topic" ><big><strong>${title}</strong></big></div>
+                <div class="post-content">
+                    ${content}
+                </div>
+            </div>
+            $endeach$
+        </div>
+    </body>
+</html>
