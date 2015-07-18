@@ -106,14 +106,10 @@
         return nil;
     }
     
-    if (indexPath.section >= [self.panelItems count] || indexPath.row >= [self.panelItems[indexPath.section] count]) {
-        return nil;
+    if ([[CC98Client sharedInstance] hasLoggedIn]) {
+        return self.panelItems[indexPath.section][indexPath.row];
     } else {
-        if ([[CC98Client sharedInstance] hasLoggedIn]) {
-            return self.panelItems[indexPath.section][indexPath.row];
-        } else {
-            return self.panelItems[indexPath.section+1][indexPath.row];
-        }
+        return self.panelItems[indexPath.section+1][indexPath.row];
     }
 }
 
