@@ -55,7 +55,7 @@
 #define POST_USER_NAME @"(?<=<span style=\"color: #.{3,8};\"><b>).*?(?=</b></span>)"
 #define POST_USER_GENDER @"(?<=\\.gif title=)帅哥|(?<=\\.gif title=)美女|(?<=\\.gif\" title=\")匿名帅哥|(?<=\\.gif\" title=\")匿名美女"
 #define POST_USER_IMAGE @"(?<=\"><img src=\").*?(?=\" style=)|(?<=&nbsp;<img src=\").*?(?=\" style=\"border-style)"
-#define POST_FLOOR_INFO @"((?<=title=\"引用回复这个帖子\" /></a>&nbsp;)楼主(?=</td>))|((?<=第<font color=#FF0000>)\\d{1,7}(?=</font>楼&nbsp;))"
+#define POST_FLOOR_INFO @"((?<=/></a>&nbsp;)楼主(?=</td>))|((?<=第<font color=#FF0000>)\\d{1,7}(?=</font>楼&nbsp;))"
 #define POST_QUOTE_ADDRESS @"reannounce.asp\\?BoardID=\\d{1,10}&replyID=\\d{1,10}&id=\\d{1,10}&star=\\d{1,10}&reply=true&bm=\\d{1,10}"
 
 

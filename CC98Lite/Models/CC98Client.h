@@ -11,6 +11,8 @@
 
 @class CC98Account;
 
+#define TEST_ACCOUNT @"lunarfire"
+
 
 @interface CC98Client : AFHTTPSessionManager
 

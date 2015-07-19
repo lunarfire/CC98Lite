@@ -9,6 +9,7 @@
 #import "CC98PostListViewController.h"
 #import "CC98PageOperatingVCDelegate.h"
 #import "CC98Topic.h"
+#import "CC98Account.h"
 #import "CC98QuotePost.h"
 #import "CC98ReplyPost.h"
 #import "NSError+CC98Style.h"
@@ -91,6 +92,13 @@
             if (![[CC98Client sharedInstance] hasLoggedIn]) {
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[NSError cc98ErrorDomain]
                                                                 message:@"请您先登录，访客没有发帖回帖权限"
+                                                               delegate:self
+                                                      cancelButtonTitle:@"确定"
+                                                      otherButtonTitles:nil, nil];
+                [alert show];
+            } else if ([[[[CC98Client sharedInstance] currentAccount] name] isEqualToString:TEST_ACCOUNT]) {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[NSError cc98ErrorDomain]
+                                                                message:@"测试帐号没有发帖回帖权限"
                                                                delegate:self
                                                       cancelButtonTitle:@"确定"
                                                       otherButtonTitles:nil, nil];
@@ -279,6 +287,13 @@
         if (![[CC98Client sharedInstance] hasLoggedIn]) {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[NSError cc98ErrorDomain]
                                                             message:@"请您先登录，访客没有发帖回帖权限"
+                                                           delegate:self
+                                                  cancelButtonTitle:@"确定"
+                                                  otherButtonTitles:nil, nil];
+            [alert show];
+        } else if ([[[[CC98Client sharedInstance] currentAccount] name] isEqualToString:TEST_ACCOUNT]) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[NSError cc98ErrorDomain]
+                                                            message:@"测试帐号没有发帖回帖权限"
                                                            delegate:self
                                                   cancelButtonTitle:@"确定"
                                                   otherButtonTitles:nil, nil];

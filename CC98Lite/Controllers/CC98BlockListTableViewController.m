@@ -137,6 +137,13 @@
                                               cancelButtonTitle:@"确定"
                                               otherButtonTitles:nil, nil];
         [alert show];
+    } else if ([[[[CC98Client sharedInstance] currentAccount] name] isEqualToString:TEST_ACCOUNT]) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[NSError cc98ErrorDomain]
+                                                        message:@"测试帐号没有发帖回帖权限"
+                                                       delegate:self
+                                              cancelButtonTitle:@"确定"
+                                              otherButtonTitles:nil, nil];
+        [alert show];
     } else {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
         CC98EditPostViewController *viewController = [storyboard instantiateViewControllerWithIdentifier:@"editForPostView"];
