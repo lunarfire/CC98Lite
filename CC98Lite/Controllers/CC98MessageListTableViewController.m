@@ -112,7 +112,7 @@
         if (!error) {
             self.messages = messages;
             [self.tableView reloadData];
-            [self.tableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:NO];
+            [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
             self.navigationItem.title = [NSString stringWithFormat:@"%@ (%ld/%ld)", self.messageBox.title, (long)(self.currentPageNum), (long)(self.messageBox.numberOfPages)];
         }
     }];

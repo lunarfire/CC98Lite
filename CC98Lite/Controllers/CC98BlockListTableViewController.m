@@ -50,7 +50,7 @@
 - (void)postProcessWithError:(NSError *)error {
     if (!error) {
         [self.tableView reloadData];
-        [self.tableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:NO];
+        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
         self.navigationItem.title = self.dataSource.navigationBarName;
     } else {
         if (error.code >= 0) {  // 仅给出自定义异常的提示
