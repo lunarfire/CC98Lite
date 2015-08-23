@@ -7,13 +7,16 @@
 //
 
 #import "CC98MessageContentViewController.h"
+#import "CC98Topic.h"
 #import "CC98BarButtonItem.h"
 #import "UIColor+CC98Style.h"
 #import "CC98EditMessageViewController.h"
+#import "CC98PostListViewController.h"
+#import "SystemUtility.h"
 #import "NSError+CC98Style.h"
 #import "NSString+CC98Style.h"
 
-@interface CC98MessageContentViewController () <CC98BarButtonItemDelegate>
+@interface CC98MessageContentViewController () <CC98BarButtonItemDelegate, UIWebViewDelegate>
 @property (weak, nonatomic) IBOutlet UIWebView *messageContent;
 @property (weak, nonatomic) IBOutlet UIToolbar *messageToolBar;
 @property (weak, nonatomic) IBOutlet CC98BarButtonItem *deleteButton;
@@ -28,6 +31,8 @@
     if (self.message.prevMessageAddress != nil) {
         CC98Message *prevMessage = [[CC98Message alloc] init];
         prevMessage.address = self.message.prevMessageAddress;
+        
+        [SystemUtility transitionWithType:kCATransitionReveal WithSubtype:kCATransitionFromLeft ForView:self.view];
 
         [prevMessage contentWithBlock:^(NSError *error) {
             if (!error) {
@@ -49,6 +54,8 @@
     if (self.message.nextMessageAddress != nil) {
         CC98Message *nextMessage = [[CC98Message alloc] init];
         nextMessage.address = self.message.nextMessageAddress;
+        
+        [SystemUtility transitionWithType:kCATransitionReveal WithSubtype:kCATransitionFromRight ForView:self.view];
         
         [nextMessage contentWithBlock:^(NSError *error) {
             if (!error) {
@@ -72,6 +79,7 @@
     
     self.messageToolBar.backgroundColor = [UIColor mediumGrey];
     self.messageContent.dataDetectorTypes = UIDataDetectorTypeNone;
+    self.messageContent.delegate = self;
     
     self.deleteButton.title = @"删除";
     self.replyButton.title = @"回复";
@@ -125,6 +133,29 @@
             [alert show];
         }
     }];
+}
+
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
+    NSString *requestString = [[request URL] absoluteString];
+    NSString *tag = [requestString firstMatchRegex:@"dispbbs\\.asp\\?boardID="];
+    if (tag) {
+        CC98Topic *topic = [[CC98Topic alloc] init];
+        topic.boardID = [requestString firstMatchRegex:@"(?<=boardID=)\\d{1,10}(?=&)"];
+        topic.identifier = [requestString firstMatchRegex:@"(?<=&ID=)\\d{1,10}(?=&)"];
+        NSInteger pageNum = [[requestString firstMatchRegex:@"(?<=&star=)\\d{1,10}"] integerValue];
+        
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
+        CC98PostListViewController *viewController = [storyboard instantiateViewControllerWithIdentifier:@"postListWebView"];
+        
+        viewController.topic = topic;
+        viewController.jumpFromOtherPages = YES;
+        [self.navigationController pushViewController:viewController animated:YES];
+        viewController.currentPageNum = pageNum;
+        
+        return NO;
+    }
+
+    return YES;
 }
 
 - (void)replyMessage {

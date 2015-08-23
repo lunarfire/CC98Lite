@@ -20,6 +20,9 @@
     [super viewDidLoad];
     self.navigationItem.title = @"关于";
     
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    [self.aboutText scrollRangeToVisible:NSMakeRange(0, 0)];
+    
     NSString *mainContent = @"◎ 软件作者：小林 @CC98\n\n◎ 当前版本号：V1.0\n\n◎ 特别感谢以下朋友的帮助：\n•  科洛丝公主 @CC98\n•  Auser @CC98\n•  ytfhqqu @CC98\n•  欧阳 @CC98\n•  DJ @CC98\n\n◎ 软件中所有iOS 7 Style图标（Icon）均来源于Subway图标集，按license的要求提供授权条款链接：http://creativecommons.org/licenses/by/4.0/\n\n◎ 软件使用了以下开源组件，向组件作者表示衷心感谢：\n•  AFNetworking\n•  MBProgressHUD\n•  MWPhotoBrowser\n•  SDWebImage\n•  Reachability\n•  STKeychain\n•  RNGridMenu\n\n\n◎ 开源组件许可：\n";
     
     NSString *afnContent = @"•  AFNetworking: \nCopyright (c) 2011–2015 Alamofire Software Foundation (http://alamofire.org/)\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n\n";

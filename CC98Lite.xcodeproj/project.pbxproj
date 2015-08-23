@@ -85,6 +85,7 @@
 		128906D91B1CD9DC00972946 /* CC98BlockListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 128906D81B1CD9DC00972946 /* CC98BlockListTableViewCell.m */; };
 		128B71EF1B12012A00B87B99 /* CC98Client.m in Sources */ = {isa = PBXBuildFile; fileRef = 128B71EE1B12012A00B87B99 /* CC98Client.m */; };
 		12923DA71B57DC2900DB67E8 /* CC98AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 12923DA61B57DC2900DB67E8 /* CC98AboutViewController.m */; };
+		1296D4101B89F84E00E358A2 /* SystemUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 1296D40F1B89F84E00E358A2 /* SystemUtility.m */; };
 		1298081C1B2A053D00ACEBD0 /* UIViewController+BackButtonHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 1298081B1B2A053D00ACEBD0 /* UIViewController+BackButtonHandler.m */; };
 		129EBF5D1B1FF82700E433C2 /* CC98LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 129EBF5C1B1FF82700E433C2 /* CC98LoginViewController.m */; };
 		129EBF641B205A6E00E433C2 /* UIColor+CC98Style.m in Sources */ = {isa = PBXBuildFile; fileRef = 129EBF631B205A6E00E433C2 /* UIColor+CC98Style.m */; };
@@ -256,6 +257,8 @@
 		128B71EE1B12012A00B87B99 /* CC98Client.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CC98Client.m; path = Models/CC98Client.m; sourceTree = "<group>"; };
 		12923DA51B57DC2900DB67E8 /* CC98AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CC98AboutViewController.h; path = Controllers/CC98AboutViewController.h; sourceTree = "<group>"; };
 		12923DA61B57DC2900DB67E8 /* CC98AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CC98AboutViewController.m; path = Controllers/CC98AboutViewController.m; sourceTree = "<group>"; };
+		1296D40E1B89F84E00E358A2 /* SystemUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SystemUtility.h; path = Utilities/SystemUtility.h; sourceTree = "<group>"; };
+		1296D40F1B89F84E00E358A2 /* SystemUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SystemUtility.m; path = Utilities/SystemUtility.m; sourceTree = "<group>"; };
 		1298081A1B2A053D00ACEBD0 /* UIViewController+BackButtonHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIViewController+BackButtonHandler.h"; path = "Utilities/UIViewController+BackButtonHandler.h"; sourceTree = "<group>"; };
 		1298081B1B2A053D00ACEBD0 /* UIViewController+BackButtonHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+BackButtonHandler.m"; path = "Utilities/UIViewController+BackButtonHandler.m"; sourceTree = "<group>"; };
 		129EBF5B1B1FF82700E433C2 /* CC98LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CC98LoginViewController.h; path = Controllers/CC98LoginViewController.h; sourceTree = "<group>"; };
@@ -578,6 +581,8 @@
 				12A8D5771B2919AC009D7817 /* UIButton+CC98Style.m */,
 				1276AA511B404AD600EFEC9D /* UIImage+CC98Style.h */,
 				1276AA521B404AD600EFEC9D /* UIImage+CC98Style.m */,
+				1296D40E1B89F84E00E358A2 /* SystemUtility.h */,
+				1296D40F1B89F84E00E358A2 /* SystemUtility.m */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -760,6 +765,7 @@
 				125C83A01B4179EF00FF96D5 /* CC98SettingsTableViewController.m in Sources */,
 				12A8D57B1B2930E2009D7817 /* UIViewController+KNSemiModal.m in Sources */,
 				126F14881B40D18F00468948 /* CC98UserProfile.m in Sources */,
+				1296D4101B89F84E00E358A2 /* SystemUtility.m in Sources */,
 				12702DE91B2EFB37004A5083 /* CC98ReplyPost.m in Sources */,
 				125E02611B2805DA00FB0BDB /* CC98BarButtonItem.m in Sources */,
 				127C40EA1B327961009DCE00 /* CC98ControlPanelHeaderView.m in Sources */,

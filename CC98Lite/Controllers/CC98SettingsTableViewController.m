@@ -19,6 +19,7 @@
     self.navigationItem.title = @"设置";
     
     self.tableView.backgroundColor = [UIColor whiteColor];
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     self.tableView.backgroundView = nil;
     
     // Uncomment the following line to preserve selection between presentations.

@@ -11,6 +11,7 @@
 #import "UITableViewCell+CC98Style.h"
 #import "CC98PostListViewController.h"
 #import "NSError+CC98Style.h"
+#import "SystemUtility.h"
 #import "CC98Board.h"
 #import "CC98Topic.h"
 #import "CC98NewPost.h"
@@ -71,21 +72,23 @@
     }];
 }
 
-- (void)loadNextPageWithBlock:(void (^)(NSError *error))block {
+- (void)loadNextPageWithBlock:(void (^)(NSError *error))block andView:(UIView *)view {
     if (self.board.currentPageNum >= self.board.numberOfPages) {
         if (block) { block([NSError errorWithCode:CC98ExceedTailPage description:@"已经到最后一页啦"]); }
         return;
     }
+    [SystemUtility transitionWithType:kCATransitionReveal WithSubtype:kCATransitionFromRight ForView:view];
 
     ++self.board.currentPageNum;
     [self updateWithBlock:block];
 }
 
-- (void)loadPrevPageWithBlock:(void (^)(NSError *error))block {
+- (void)loadPrevPageWithBlock:(void (^)(NSError *error))block andView:(UIView *)view {
     if (self.board.currentPageNum <= 1) {
         if (block) { block([NSError errorWithCode:CC98ExceedHeadPage description:@"已经到第一页啦"]); }
         return;
     }
+    [SystemUtility transitionWithType:kCATransitionReveal WithSubtype:kCATransitionFromLeft ForView:view];
     
     --self.board.currentPageNum;
     [self updateWithBlock:block];

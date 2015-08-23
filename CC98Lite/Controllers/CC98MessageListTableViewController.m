@@ -8,6 +8,7 @@
 
 #import "CC98MessageListTableViewController.h"
 #import "CC98Message.h"
+#import "SystemUtility.h"
 #import "CC98MessageListTableViewCell.h"
 #import "NSError+CC98Style.h"
 #import "UIViewController+BackButtonHandler.h"
@@ -18,6 +19,8 @@
 
 @property (strong, nonatomic) NSArray *messages;
 @property (assign, nonatomic) NSInteger currentPageNum;
+
+@property (assign, nonatomic) BOOL needScrollToTop;
 
 @end
 
@@ -32,6 +35,9 @@
                                               otherButtonTitles:nil, nil];
         [alert show];
     } else {
+        [SystemUtility transitionWithType:kCATransitionReveal WithSubtype:kCATransitionFromLeft ForView:self.view];
+        
+        self.needScrollToTop = YES;
         --self.currentPageNum;
     }
 }
@@ -45,6 +51,9 @@
                                               otherButtonTitles:nil, nil];
         [alert show];
     } else {
+        [SystemUtility transitionWithType:kCATransitionReveal WithSubtype:kCATransitionFromRight ForView:self.view];
+        
+        self.needScrollToTop = YES;
         ++self.currentPageNum;
     }
 }
@@ -72,8 +81,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.needScrollToTop = YES;
     
     self.tableView.backgroundColor = [UIColor whiteColor];
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     self.tableView.backgroundView = nil;
     
     UIBarButtonItem *tempBarButtonItem = [[UIBarButtonItem alloc] init];
@@ -112,7 +123,11 @@
         if (!error) {
             self.messages = messages;
             [self.tableView reloadData];
-            [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
+            
+            if (self.needScrollToTop && [self tableView:self.tableView numberOfRowsInSection:0] > 0) {
+                [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
+                self.needScrollToTop = NO;
+            }
             self.navigationItem.title = [NSString stringWithFormat:@"%@ (%ld/%ld)", self.messageBox.title, (long)(self.currentPageNum), (long)(self.messageBox.numberOfPages)];
         }
     }];

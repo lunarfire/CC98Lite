@@ -32,7 +32,13 @@
         [self.dataSource loadNextPageWithBlock:^(NSError *error) {
             [self postProcessWithError:error];
             [hud hide:YES];
-        }];
+            
+            if (!error) {
+                if ([self.dataSource tableView:self.tableView numberOfRowsInSection:0] > 0) {
+                    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
+                }
+            }
+        } andView:self.view];
     }
 }
 
@@ -43,14 +49,19 @@
         [self.dataSource loadPrevPageWithBlock:^(NSError *error) {
             [self postProcessWithError:error];
             [hud hide:YES];
-        }];
+            
+            if (!error) {
+                if ([self.dataSource tableView:self.tableView numberOfRowsInSection:0] > 0) {
+                    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
+                }
+            }
+        } andView:self.view];
     }
 }
 
 - (void)postProcessWithError:(NSError *)error {
     if (!error) {
         [self.tableView reloadData];
-        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
         self.navigationItem.title = self.dataSource.navigationBarName;
     } else {
         if (error.code >= 0) {  // 仅给出自定义异常的提示
@@ -87,6 +98,7 @@
     self.tableView.dataSource = self.dataSource;
     
     self.tableView.backgroundColor = [UIColor whiteColor];
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     self.tableView.backgroundView = nil;
     
     self.refreshControl = [[UIRefreshControl alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.tableView.frame.size.width, 100.0f)];

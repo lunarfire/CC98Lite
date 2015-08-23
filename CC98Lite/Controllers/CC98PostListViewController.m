@@ -8,6 +8,7 @@
 
 #import "CC98PostListViewController.h"
 #import "CC98PageOperatingVCDelegate.h"
+#import "SystemUtility.h"
 #import "CC98Topic.h"
 #import "CC98Account.h"
 #import "CC98QuotePost.h"
@@ -33,7 +34,6 @@
 @interface CC98PostListViewController () <CC98PageOperatingVCDelegate, UIWebViewDelegate, RNGridMenuDelegate, MWPhotoBrowserDelegate>
 
 @property (strong, nonatomic) NSArray *posts;
-@property (assign, nonatomic) NSInteger currentPageNum;
 @property (weak, nonatomic) IBOutlet UIWebView *postList;
 @property (weak, nonatomic) IBOutlet UIToolbar *toolBar;
 @property (weak, nonatomic) IBOutlet CC98BarButtonItem *replyButton;
@@ -240,13 +240,22 @@
     tempBarButtonItem.title = @"返回";
     self.navigationItem.backBarButtonItem = tempBarButtonItem;
     
-    self.currentPageNum = 1;
+    if (!self.jumpFromOtherPages) {
+        self.currentPageNum = 1;
+    }
 }
 
 @dynamic currentPageNum;
 
 - (void)setCurrentPageNum:(NSInteger)pageNum {
-    NSAssert(pageNum<=self.topic.numberOfPages && pageNum>=1, @"检测到无效页码输入");
+    // NSAssert(pageNum<=self.topic.numberOfPages && pageNum>=1, @"检测到无效页码输入");
+    if (self.pageOperatingVC.currentPageNum > 0) { // 处于翻页过程，而不是第一次显示
+        if (self.pageOperatingVC.currentPageNum < pageNum) { // 向后翻页
+            [SystemUtility transitionWithType:kCATransitionReveal WithSubtype:kCATransitionFromRight ForView:self.view];
+        } else if (self.pageOperatingVC.currentPageNum > pageNum) { // 向前翻页
+            [SystemUtility transitionWithType:kCATransitionReveal WithSubtype:kCATransitionFromLeft ForView:self.view];
+        }
+    }
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
     self.pageOperatingVC.currentPageNum = pageNum;

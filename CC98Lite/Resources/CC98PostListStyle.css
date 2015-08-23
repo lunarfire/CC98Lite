@@ -4,6 +4,12 @@ div {
     display: block;
 }
 
+* {
+    outline: 0px solid transparent;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-touch-callout: none;
+}
+
 body {
     font-family: Microsoft YaHei;
     background-color: #f2f2f2;

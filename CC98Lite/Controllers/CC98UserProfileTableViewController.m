@@ -34,6 +34,7 @@
     self.tableView.dataSource = self;
     
     self.tableView.backgroundColor = [UIColor whiteColor];
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     self.tableView.backgroundView = nil;
     
     UIBarButtonItem *tempBarButtonItem = [[UIBarButtonItem alloc] init];

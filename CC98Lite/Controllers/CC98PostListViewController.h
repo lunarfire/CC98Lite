@@ -14,6 +14,8 @@
 @interface CC98PostListViewController : UIViewController <CC98BarButtonItemDelegate>
 
 @property (strong, nonatomic) CC98Topic *topic;
+@property (assign, nonatomic) NSInteger currentPageNum;
+@property (assign, nonatomic) BOOL jumpFromOtherPages;
 
 - (void)clickToolBarButton:(NSString *)buttonText;
 - (void)reloadContent;

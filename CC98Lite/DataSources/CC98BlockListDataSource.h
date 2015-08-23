@@ -30,8 +30,8 @@
 
 @optional
 
-- (void)loadNextPageWithBlock:(void (^)(NSError *error))block;
-- (void)loadPrevPageWithBlock:(void (^)(NSError *error))block;
+- (void)loadNextPageWithBlock:(void (^)(NSError *error))block andView:(UIView *)view;
+- (void)loadPrevPageWithBlock:(void (^)(NSError *error))block andView:(UIView *)view;
 
 - (CC98Post *)postForNewTopic;
 
