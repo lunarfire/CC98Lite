@@ -63,7 +63,6 @@
 		12799F271B2FB11700401E68 /* CC98QuotePost.m in Sources */ = {isa = PBXBuildFile; fileRef = 12799F261B2FB11700401E68 /* CC98QuotePost.m */; };
 		127C40CE1B3249B6009DCE00 /* CC98ControlPanelDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 127C40CD1B3249B6009DCE00 /* CC98ControlPanelDataSource.m */; };
 		127C40EA1B327961009DCE00 /* CC98ControlPanelHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 127C40E91B327961009DCE00 /* CC98ControlPanelHeaderView.m */; };
-		127F132D1B22122C00058624 /* CC98ResizeWidthLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 127F132C1B22122C00058624 /* CC98ResizeWidthLabel.m */; };
 		12820C2A1B1ED97300CA5DD9 /* CC98BlockListIconView.m in Sources */ = {isa = PBXBuildFile; fileRef = 12820C291B1ED97300CA5DD9 /* CC98BlockListIconView.m */; };
 		12820C2D1B1EE4E800CA5DD9 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12820C2B1B1EE4E800CA5DD9 /* MainStoryboard.storyboard */; };
 		12820C301B1F112B00CA5DD9 /* CC98PartitionListDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 12820C2F1B1F112B00CA5DD9 /* CC98PartitionListDataSource.m */; };
@@ -214,8 +213,6 @@
 		127C40CD1B3249B6009DCE00 /* CC98ControlPanelDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CC98ControlPanelDataSource.m; path = DataSources/CC98ControlPanelDataSource.m; sourceTree = "<group>"; };
 		127C40E81B327961009DCE00 /* CC98ControlPanelHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CC98ControlPanelHeaderView.h; path = Views/CC98ControlPanelHeaderView.h; sourceTree = "<group>"; };
 		127C40E91B327961009DCE00 /* CC98ControlPanelHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CC98ControlPanelHeaderView.m; path = Views/CC98ControlPanelHeaderView.m; sourceTree = "<group>"; };
-		127F132B1B22122C00058624 /* CC98ResizeWidthLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CC98ResizeWidthLabel.h; path = Views/CC98ResizeWidthLabel.h; sourceTree = "<group>"; };
-		127F132C1B22122C00058624 /* CC98ResizeWidthLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CC98ResizeWidthLabel.m; path = Views/CC98ResizeWidthLabel.m; sourceTree = "<group>"; };
 		12820C281B1ED97300CA5DD9 /* CC98BlockListIconView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CC98BlockListIconView.h; path = Views/CC98BlockListIconView.h; sourceTree = "<group>"; };
 		12820C291B1ED97300CA5DD9 /* CC98BlockListIconView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CC98BlockListIconView.m; path = Views/CC98BlockListIconView.m; sourceTree = "<group>"; };
 		12820C2C1B1EE4E800CA5DD9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = CC98Lite/Base.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
@@ -259,6 +256,7 @@
 		12923DA61B57DC2900DB67E8 /* CC98AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CC98AboutViewController.m; path = Controllers/CC98AboutViewController.m; sourceTree = "<group>"; };
 		1296D40E1B89F84E00E358A2 /* SystemUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SystemUtility.h; path = Utilities/SystemUtility.h; sourceTree = "<group>"; };
 		1296D40F1B89F84E00E358A2 /* SystemUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SystemUtility.m; path = Utilities/SystemUtility.m; sourceTree = "<group>"; };
+		1296D4111B8A347C00E358A2 /* Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Header.h; path = Utilities/Header.h; sourceTree = "<group>"; };
 		1298081A1B2A053D00ACEBD0 /* UIViewController+BackButtonHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIViewController+BackButtonHandler.h"; path = "Utilities/UIViewController+BackButtonHandler.h"; sourceTree = "<group>"; };
 		1298081B1B2A053D00ACEBD0 /* UIViewController+BackButtonHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+BackButtonHandler.m"; path = "Utilities/UIViewController+BackButtonHandler.m"; sourceTree = "<group>"; };
 		129EBF5B1B1FF82700E433C2 /* CC98LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CC98LoginViewController.h; path = Controllers/CC98LoginViewController.h; sourceTree = "<group>"; };
@@ -522,8 +520,6 @@
 				12820C291B1ED97300CA5DD9 /* CC98BlockListIconView.m */,
 				129EBF651B205DAF00E433C2 /* CC98TextFieldIconView.h */,
 				129EBF661B205DAF00E433C2 /* CC98TextFieldIconView.m */,
-				127F132B1B22122C00058624 /* CC98ResizeWidthLabel.h */,
-				127F132C1B22122C00058624 /* CC98ResizeWidthLabel.m */,
 				125E025F1B2805DA00FB0BDB /* CC98BarButtonItem.h */,
 				125E02601B2805DA00FB0BDB /* CC98BarButtonItem.m */,
 				125E02621B2834D000FB0BDB /* CC98BarButtonItemDelegate.h */,
@@ -547,6 +543,7 @@
 		129EBF611B205A1A00E433C2 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				1296D4111B8A347C00E358A2 /* Header.h */,
 				128536EA1B533EBF00505321 /* Reachability.h */,
 				128536EB1B533EBF00505321 /* Reachability.m */,
 				12CEEAA31B522E4100224B1F /* UIWebView+Clean.h */,
@@ -747,7 +744,6 @@
 				12730D0D1B2D23AA00FB7D37 /* GTMNSString+HTML.m in Sources */,
 				1272AA6E1B3E7B3700F749EF /* CC98HotTopicListDataSource.m in Sources */,
 				128906CE1B1CBB0200972946 /* CC98BlockListTableViewController.m in Sources */,
-				127F132D1B22122C00058624 /* CC98ResizeWidthLabel.m in Sources */,
 				127495B71B2586C400BD07CE /* CC98RegexRepository.m in Sources */,
 				128906CB1B1CA60A00972946 /* CC98CommonPartition.m in Sources */,
 				1284158F1B1380580043D1F6 /* CC98Topic.m in Sources */,
@@ -892,7 +888,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -930,7 +926,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
@@ -944,9 +940,10 @@
 			baseConfigurationReference = 7F1FC99458C58D53D9847F72 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = CC98Lite/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -958,9 +955,10 @@
 			baseConfigurationReference = 958C2F9BFD45764512459F82 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = CC98Lite/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;

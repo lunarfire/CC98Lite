@@ -10,7 +10,7 @@
 
 @implementation SystemUtility
 
-static const CGFloat DURATION = 0.7f;
+static const CGFloat DURATION = 0.4f;
 
 #pragma CATransition动画实现
 + (void)transitionWithType:(NSString *)type WithSubtype:(NSString *)subtype ForView:(UIView *)view

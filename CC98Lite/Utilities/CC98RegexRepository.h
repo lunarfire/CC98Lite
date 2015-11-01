@@ -48,7 +48,7 @@
 #define HOT_TOPIC_BOARD_NAME @"(?<=target=\"_blank\">).*?(?=</a>)"
 
 
-#define POST_WRAPPER_REGEX @"(?<=<table style=\"width: 100%;\" cellpadding=\"4\" cellspacing=\"0\">)(.|\\r|\\n|\\t)*?(?=<!-- 编辑,鸡蛋，鲜花，等 -->)"
+#define POST_WRAPPER_REGEX @"<table style=\"width: 100%;\" cellpadding=\"4\" cellspacing=\"0\">(.|\\r|\\n|\\t)*?<!-- 编辑,鸡蛋，鲜花，等 -->"
 #define POST_TITLE_REGEX @"(?<=title=\"发贴心情\">&nbsp;<b>).*?(?=</b><br />)"
 #define POST_CONTENT_REGEX @"(?<=</b><br /><br />)(.|\\r|\\n|\\t)*?</script>|<hr noshade=.*?(?=</td>)"
 #define POST_TIME_REGEX @"(?<=\"></a>)[\\d\\s:/]*?(?=</td>)"

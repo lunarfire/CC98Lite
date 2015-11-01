@@ -21,6 +21,7 @@
 @property (assign, nonatomic) NSInteger currentPageNum;
 
 @property (assign, nonatomic) BOOL needScrollToTop;
+@property (assign, nonatomic) CC98TurnPageType turnPageType;
 
 @end
 
@@ -35,8 +36,7 @@
                                               otherButtonTitles:nil, nil];
         [alert show];
     } else {
-        [SystemUtility transitionWithType:kCATransitionReveal WithSubtype:kCATransitionFromLeft ForView:self.view];
-        
+        self.turnPageType = TurnToPrevPage;
         self.needScrollToTop = YES;
         --self.currentPageNum;
     }
@@ -51,8 +51,7 @@
                                               otherButtonTitles:nil, nil];
         [alert show];
     } else {
-        [SystemUtility transitionWithType:kCATransitionReveal WithSubtype:kCATransitionFromRight ForView:self.view];
-        
+        self.turnPageType = TurnToNextPage;
         self.needScrollToTop = YES;
         ++self.currentPageNum;
     }
@@ -81,6 +80,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.turnPageType = DonotTurnPage;
     self.needScrollToTop = YES;
     
     self.tableView.backgroundColor = [UIColor whiteColor];
@@ -129,6 +130,18 @@
                 self.needScrollToTop = NO;
             }
             self.navigationItem.title = [NSString stringWithFormat:@"%@ (%ld/%ld)", self.messageBox.title, (long)(self.currentPageNum), (long)(self.messageBox.numberOfPages)];
+            
+            switch (self.turnPageType) {
+                case TurnToPrevPage:
+                    [SystemUtility transitionWithType:@"pageCurl" WithSubtype:kCATransitionFromLeft ForView:self.view];
+                    break;
+                case TurnToNextPage:
+                    [SystemUtility transitionWithType:@"pageCurl" WithSubtype:kCATransitionFromRight ForView:self.view];
+                    break;
+                default:
+                    break;
+            }
+            self.turnPageType = DonotTurnPage;
         }
     }];
 }

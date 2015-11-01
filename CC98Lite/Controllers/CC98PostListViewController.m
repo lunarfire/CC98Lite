@@ -42,6 +42,7 @@
 @property (strong, nonatomic) CC98PageOperatingViewController *pageOperatingVC;
 @property (assign, nonatomic) NSInteger currentFloorNum;
 @property (strong, nonatomic) MWPhoto *currentImage;
+@property (assign, nonatomic) CC98TurnPageType turnPageType;
 
 @end
 
@@ -56,6 +57,7 @@
                                               otherButtonTitles:nil, nil];
         [alert show];
     } else {
+        self.turnPageType = TurnToNextPage;
         ++self.currentPageNum;
     }
 }
@@ -69,6 +71,7 @@
                                               otherButtonTitles:nil, nil];
         [alert show];
     } else {
+        self.turnPageType = TurnToPrevPage;
         --self.currentPageNum;
     }
 }
@@ -221,9 +224,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.toolBar.backgroundColor = [UIColor mediumGrey];
+    self.turnPageType = DonotTurnPage;
+    
+    self.toolBar.backgroundColor = [UIColor mediumGreyColor];
     self.postList.delegate = self;
     self.postList.dataDetectorTypes = UIDataDetectorTypeNone;
+    self.postList.backgroundColor = [UIColor veryLightGreyColor];
     
     self.replyButton.title = @"回帖";
     self.turnPageButton.title = @"翻页";
@@ -249,13 +255,6 @@
 
 - (void)setCurrentPageNum:(NSInteger)pageNum {
     // NSAssert(pageNum<=self.topic.numberOfPages && pageNum>=1, @"检测到无效页码输入");
-    if (self.pageOperatingVC.currentPageNum > 0) { // 处于翻页过程，而不是第一次显示
-        if (self.pageOperatingVC.currentPageNum < pageNum) { // 向后翻页
-            [SystemUtility transitionWithType:kCATransitionReveal WithSubtype:kCATransitionFromRight ForView:self.view];
-        } else if (self.pageOperatingVC.currentPageNum > pageNum) { // 向前翻页
-            [SystemUtility transitionWithType:kCATransitionReveal WithSubtype:kCATransitionFromLeft ForView:self.view];
-        }
-    }
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
     self.pageOperatingVC.currentPageNum = pageNum;
@@ -264,6 +263,18 @@
             self.posts = posts;
             [self displayPosts];
             self.navigationItem.title = [NSString stringWithFormat:@"%ld/%ld", (long)(self.currentPageNum), (long)(self.topic.numberOfPages)];
+            
+            switch (self.turnPageType) {
+                case TurnToPrevPage:
+                    [SystemUtility transitionWithType:@"pageCurl" WithSubtype:kCATransitionFromLeft ForView:self.view];
+                    break;
+                case TurnToNextPage:
+                    [SystemUtility transitionWithType:@"pageCurl" WithSubtype:kCATransitionFromRight ForView:self.view];
+                    break;
+                default:
+                    break;
+            }
+            self.turnPageType = DonotTurnPage;
         }
         [hud hide:YES];
     }];
@@ -290,6 +301,9 @@
         [self presentPageOperatingSemiView];
         
     } else if ([buttonText isEqualToString:self.tailPageButton.title]) {
+        if (self.currentPageNum < self.topic.numberOfPages) {
+            self.turnPageType = TurnToNextPage;
+        }
         self.currentPageNum = self.topic.numberOfPages;
         
     } else if ([buttonText isEqualToString:self.replyButton.title]) {

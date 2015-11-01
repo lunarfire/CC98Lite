@@ -104,6 +104,9 @@
         if ([content rangeOfString:@"操作成功"].location != NSNotFound) {
             NSLog(@"短消息发送成功");
             if (block) { block(nil); }
+        } else if ([content rangeOfString:@"没有填写标题"].location != NSNotFound) {
+            NSError *error = [NSError errorWithCode:CC98SendMessageFailed description:@"请填写短消息标题"];
+            if (block) { block(error); }
         } else {
             NSError *error = [NSError errorWithCode:CC98SendMessageFailed description:@"短消息发送失败"];
             if (block) { block(error); }

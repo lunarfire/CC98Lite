@@ -8,8 +8,8 @@
 
 #import "CC98TopicListTableViewCell.h"
 #import "CC98BlockListIconView.h"
+#import "Header.h"
 #import "CC98Topic.h"
-#import "CC98ResizeWidthLabel.h"
 #import "NSDate+CC98Style.h"
 #import "UIColor+CC98Style.h"
 #import "UILabel+CC98Style.h"
@@ -17,12 +17,14 @@
 @interface CC98TopicListTableViewCell ()
 
 @property (weak, nonatomic) IBOutlet CC98BlockListIconView *topicIcon;
-@property (weak, nonatomic) IBOutlet CC98ResizeWidthLabel *topicTitle;
+@property (weak, nonatomic) IBOutlet UILabel *topicTitle;
 @property (weak, nonatomic) IBOutlet CC98BlockListIconView *popularityIcon;
 @property (weak, nonatomic) IBOutlet UILabel *popularity;
 @property (weak, nonatomic) IBOutlet CC98BlockListIconView *authorIcon;
 @property (weak, nonatomic) IBOutlet UILabel *authorName;
 @property (weak, nonatomic) IBOutlet UILabel *latestReplyTime;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *titleIconWidth;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *popularityIconWidth;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *authorIconWidth;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *popularityIconOffset;
@@ -77,7 +79,7 @@ static const CGFloat TOPIC_INFO_SIZE = 10.5f;
 }
 
 - (void)setupUserInterface {
-    [self.topicTitle setNumberOfLines:2];
+    [self.topicTitle setNumberOfLines:0];
     [self.topicIcon setFilledColor:[UIColor lightBlueColor]];
     
     [self setTopicTitleText:@"未知"];
@@ -85,12 +87,22 @@ static const CGFloat TOPIC_INFO_SIZE = 10.5f;
     
     [self setLatestReplyTimeText:[[NSDate date] toString]];
     
-    static const CGFloat SCREEN_WIDTH_BETWEEN_5S_AND_6 = 350;
-    if ([UIScreen mainScreen].bounds.size.width < SCREEN_WIDTH_BETWEEN_5S_AND_6) {
-        self.popularityIconWidth.constant = 0;
-        self.authorIconWidth.constant = 0;
-        self.popularityIconOffset.constant = 0;
-        self.authorIconOffset.constant = 0;
+    if (iphone4x_3_5 || iphone5x_4_0) {
+        // self.popularityIconWidth.constant = 0;
+        // self.authorIconWidth.constant = 0;
+        // self.popularityIconOffset.constant = 0;
+        // self.authorIconOffset.constant = 0;
+        
+        self.accessoryType = UITableViewCellAccessoryNone;
+        self.titleIconWidth.constant = 0;
+    }
+    
+    if (iphone4x_3_5 || iphone5x_4_0) {
+        self.topicTitle.preferredMaxLayoutWidth = 223+26+29;
+    } else if (iphone6_4_7) {
+        self.topicTitle.preferredMaxLayoutWidth = 278;
+    } else if (iphone6Plus_5_5) {
+        self.topicTitle.preferredMaxLayoutWidth = 318;
     }
 }
 
@@ -122,6 +134,13 @@ static const CGFloat TOPIC_INFO_SIZE = 10.5f;
     
     self.topicIcon.image = [[_topic class] icon];
     self.topicIcon.filledColor = [self topicIconColor:_topic.status];
+    
+    if (iphone4x_3_5 || iphone5x_4_0) {
+        self.topicTitle.textColor = [self topicIconColor:_topic.status];
+        if (_topic.status == CC98OpenTopic) {
+            self.topicTitle.textColor = [UIColor brightBlueColor];
+        }
+    }
 }
 
 - (UIColor *)topicIconColor:(CC98TopicStatus)status {
@@ -133,11 +152,11 @@ static const CGFloat TOPIC_INFO_SIZE = 10.5f;
         case CC98OpenTopic:
             return [UIColor lightBlueColor];
         case CC98SavedTopic:
-            return [UIColor lightGreenColor];
+            return [UIColor mediumGreenColor];
         case CC98EssentialTopic:
             return [UIColor blueColor];
         case CC98LockedTopic:
-            return [UIColor lightGrayColor];
+            return [UIColor grayColor];
         default:
             return [UIColor lightBlueColor];
     }

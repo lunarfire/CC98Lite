@@ -72,23 +72,21 @@
     }];
 }
 
-- (void)loadNextPageWithBlock:(void (^)(NSError *error))block andView:(UIView *)view {
+- (void)loadNextPageWithBlock:(void (^)(NSError *error))block {
     if (self.board.currentPageNum >= self.board.numberOfPages) {
         if (block) { block([NSError errorWithCode:CC98ExceedTailPage description:@"已经到最后一页啦"]); }
         return;
     }
-    [SystemUtility transitionWithType:kCATransitionReveal WithSubtype:kCATransitionFromRight ForView:view];
 
     ++self.board.currentPageNum;
     [self updateWithBlock:block];
 }
 
-- (void)loadPrevPageWithBlock:(void (^)(NSError *error))block andView:(UIView *)view {
+- (void)loadPrevPageWithBlock:(void (^)(NSError *error))block {
     if (self.board.currentPageNum <= 1) {
         if (block) { block([NSError errorWithCode:CC98ExceedHeadPage description:@"已经到第一页啦"]); }
         return;
     }
-    [SystemUtility transitionWithType:kCATransitionReveal WithSubtype:kCATransitionFromLeft ForView:view];
     
     --self.board.currentPageNum;
     [self updateWithBlock:block];
@@ -122,8 +120,8 @@
     });
     [self configureCell:sizingCell forRowAtIndex:indexPath];
     
-    static const CGFloat kPaddingHeight = 10.0f;
-    return [sizingCell calculateHeightOfCellWithTableViewFrame:tableView.frame] + kPaddingHeight;
+    CGSize size = [sizingCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
+    return 11 + size.height;
 }
 
 

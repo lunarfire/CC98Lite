@@ -85,7 +85,7 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     CGFloat height = [self tableView:tableView heightForHeaderInSection:section];
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, height)];
-    view.backgroundColor = [UIColor mediumGrey];
+    view.backgroundColor = [UIColor mediumGreyColor];
     return view;
 }
 

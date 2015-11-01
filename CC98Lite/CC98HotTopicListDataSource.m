@@ -89,8 +89,8 @@
     });
     [self configureCell:sizingCell forRowAtIndex:indexPath];
     
-    static const CGFloat kPaddingHeight = 10.0f;
-    return [sizingCell calculateHeightOfCellWithTableViewFrame:tableView.frame] + kPaddingHeight;
+    CGSize size = [sizingCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
+    return 11 + size.height;
 }
 
 

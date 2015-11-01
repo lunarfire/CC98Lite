@@ -45,12 +45,14 @@ img {
     font-weight: bold;
     color: #0099CC;
     font-size: 12pt;
+    line-height: 14pt;
 }
 
 .gender {
     float: right;
     color: grey;
     font-size: 13pt;
+    line-height: 14pt;
 }
 
 .floor-num {

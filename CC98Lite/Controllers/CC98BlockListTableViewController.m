@@ -9,6 +9,7 @@
 #import "CC98BlockListTableViewController.h"
 #import "UIViewController+BackButtonHandler.h"
 #import "CC98EditPostViewController.h"
+#import "SystemUtility.h"
 #import "CC98Partition.h"
 #import "CC98Client.h"
 #import "CC98Account.h"
@@ -25,7 +26,7 @@
 
 @implementation CC98BlockListTableViewController
 
-- (IBAction)swipeForNextPage:(UISwipeGestureRecognizer *)sender {
+- (void)swipeForNextPage:(UISwipeGestureRecognizer *)sender {
     if ([self.dataSource hasMultiplePages]) {
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         
@@ -37,12 +38,13 @@
                 if ([self.dataSource tableView:self.tableView numberOfRowsInSection:0] > 0) {
                     [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
                 }
+                [SystemUtility transitionWithType:@"pageCurl" WithSubtype:kCATransitionFromRight ForView:self.view];
             }
-        } andView:self.view];
+        }];
     }
 }
 
-- (IBAction)swipeForPrevPage:(id)sender {
+- (void)swipeForPrevPage:(id)sender {
     if ([self.dataSource hasMultiplePages]) {
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         
@@ -54,8 +56,9 @@
                 if ([self.dataSource tableView:self.tableView numberOfRowsInSection:0] > 0) {
                     [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
                 }
+                [SystemUtility transitionWithType:@"pageCurl" WithSubtype:kCATransitionFromLeft ForView:self.view];
             }
-        } andView:self.view];
+        }];
     }
 }
 
@@ -125,6 +128,14 @@
                                                                       }];
         self.tableView.tableHeaderView = self.headerView;
     }
+    
+    UISwipeGestureRecognizer *leftSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeForNextPage:)];
+    [leftSwipe setDirection:(UISwipeGestureRecognizerDirectionLeft)];
+    [self.view addGestureRecognizer:leftSwipe];
+    
+    UISwipeGestureRecognizer *rightSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeForPrevPage:)];
+    [rightSwipe setDirection:(UISwipeGestureRecognizerDirectionRight)];
+    [self.view addGestureRecognizer:rightSwipe];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -197,7 +208,7 @@
     if ([self.dataSource numberOfSectionsInTableView:tableView] > 1 || [self.dataSource hasTableHeaderView]) {
         CGFloat height = [self tableView:tableView heightForHeaderInSection:section];
         view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, height)];
-        view.backgroundColor = [UIColor mediumGrey];
+        view.backgroundColor = [UIColor mediumGreyColor];
     }
     return view;
 }

@@ -11,8 +11,10 @@
 @interface UIColor (CC98Style)
 
 + (UIColor *)lightBlueColor;
++ (UIColor *)brightBlueColor;
 + (UIColor *)goldenColor;
-+ (UIColor *)mediumGrey;
-+ (UIColor *)lightGreenColor;
++ (UIColor *)mediumGreyColor;
++ (UIColor *)veryLightGreyColor;
++ (UIColor *)mediumGreenColor;
 
 @end

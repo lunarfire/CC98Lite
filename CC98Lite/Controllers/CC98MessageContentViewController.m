@@ -31,13 +31,13 @@
     if (self.message.prevMessageAddress != nil) {
         CC98Message *prevMessage = [[CC98Message alloc] init];
         prevMessage.address = self.message.prevMessageAddress;
-        
-        [SystemUtility transitionWithType:kCATransitionReveal WithSubtype:kCATransitionFromLeft ForView:self.view];
 
         [prevMessage contentWithBlock:^(NSError *error) {
             if (!error) {
                 self.message = prevMessage;
                 [self displayMessageContent];
+                
+                [SystemUtility transitionWithType:@"pageCurl" WithSubtype:kCATransitionFromLeft ForView:self.view];
             }
         }];
     } else {
@@ -55,12 +55,12 @@
         CC98Message *nextMessage = [[CC98Message alloc] init];
         nextMessage.address = self.message.nextMessageAddress;
         
-        [SystemUtility transitionWithType:kCATransitionReveal WithSubtype:kCATransitionFromRight ForView:self.view];
-        
         [nextMessage contentWithBlock:^(NSError *error) {
             if (!error) {
                 self.message = nextMessage;
                 [self displayMessageContent];
+                
+                [SystemUtility transitionWithType:@"pageCurl" WithSubtype:kCATransitionFromRight ForView:self.view];
             }
         }];
     } else {
@@ -77,9 +77,10 @@
     [super viewDidLoad];
     self.tabBarController.tabBar.hidden = YES;
     
-    self.messageToolBar.backgroundColor = [UIColor mediumGrey];
+    self.messageToolBar.backgroundColor = [UIColor mediumGreyColor];
     self.messageContent.dataDetectorTypes = UIDataDetectorTypeNone;
     self.messageContent.delegate = self;
+    self.messageContent.backgroundColor = [UIColor veryLightGreyColor];
     
     self.deleteButton.title = @"删除";
     self.replyButton.title = @"回复";
