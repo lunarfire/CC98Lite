@@ -376,8 +376,6 @@
                                     <outlet property="messagePerson" destination="bOs-6Z-hIK" id="N49-V5-7Gw"/>
                                     <outlet property="messageTime" destination="Irf-wl-3Qg" id="hHC-Ky-xPf"/>
                                     <outlet property="messageTitle" destination="GEj-yF-LFD" id="ZhB-w4-aWq"/>
-                                    <outletCollection property="gestureRecognizers" destination="7ae-Ym-Ir3" appends="YES" id="i1p-Pg-znR"/>
-                                    <outletCollection property="gestureRecognizers" destination="VXI-ZW-tpa" appends="YES" id="5IF-4Q-RSy"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -388,16 +386,6 @@
                     </tableView>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="E2I-ut-Xje" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <swipeGestureRecognizer direction="right" id="7ae-Ym-Ir3">
-                    <connections>
-                        <action selector="swipeForPrevPage:" destination="E1t-47-bvF" id="bxI-wT-tv9"/>
-                    </connections>
-                </swipeGestureRecognizer>
-                <swipeGestureRecognizer direction="left" id="VXI-ZW-tpa">
-                    <connections>
-                        <action selector="swipeForNextPage:" destination="E1t-47-bvF" id="JId-xO-tAw"/>
-                    </connections>
-                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="3492" y="1656"/>
         </scene>

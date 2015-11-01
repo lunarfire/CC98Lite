@@ -27,7 +27,7 @@
 
 @implementation CC98MessageListTableViewController
 
-- (IBAction)swipeForPrevPage:(UISwipeGestureRecognizer *)sender {
+- (void)swipeForPrevPage:(UISwipeGestureRecognizer *)sender {
     if (self.currentPageNum == 1) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[NSError cc98ErrorDomain]
                                                         message:@"已经到第一页啦"
@@ -42,7 +42,7 @@
     }
 }
 
-- (IBAction)swipeForNextPage:(UISwipeGestureRecognizer *)sender {
+- (void)swipeForNextPage:(UISwipeGestureRecognizer *)sender {
     if (self.currentPageNum == self.messageBox.numberOfPages) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[NSError cc98ErrorDomain]
                                                         message:@"已经到最后一页啦"
@@ -97,8 +97,15 @@
                                                                          target:self
                                                                          action:@selector(writeNewMessage)];
     self.navigationItem.rightBarButtonItem = newMessageBarButtonItem;
-    
     self.currentPageNum = 1;
+    
+    UISwipeGestureRecognizer *leftSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeForNextPage:)];
+    [leftSwipe setDirection:(UISwipeGestureRecognizerDirectionLeft)];
+    [self.view addGestureRecognizer:leftSwipe];
+    
+    UISwipeGestureRecognizer *rightSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeForPrevPage:)];
+    [rightSwipe setDirection:(UISwipeGestureRecognizerDirectionRight)];
+    [self.view addGestureRecognizer:rightSwipe];
 }
 
 -(BOOL)navigationShouldPopOnBackButton{
