@@ -10,11 +10,13 @@
 #import "CC98ControlPanelHeaderView.h"
 #import "CC98UserProfile.h"
 #import "UIColor+CC98Style.h"
+#import "MBProgressHUD.h"
 
 @interface CC98UserProfileTableViewController ()
 
 @property (strong, nonatomic) CC98ControlPanelHeaderView *headerView;
 @property (strong, nonatomic) CC98UserProfile *userProfile;
+@property (strong, nonatomic) MBProgressHUD *hud;
 
 @end
 
@@ -29,6 +31,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.hud = [[MBProgressHUD alloc] initWithView:self.tableView];
+    [self.tableView addSubview:self.hud];
+    [self.hud hide:YES];
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -46,7 +52,9 @@
                                                                andBlock:nil];
     self.tableView.tableHeaderView = self.headerView;
     
+    [self.hud show:YES];
     [self.userProfile updateForUserName:self.userName andBlock:^(NSError *error) {
+        [self.hud hide:YES];
         if (!error) {
             [self.headerView updateWithUserName:self.userName andUserImage:self.userPortrait];
             [self.tableView reloadData];

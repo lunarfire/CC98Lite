@@ -11,4 +11,7 @@
 
 @interface CC98AboutViewController : UIViewController <CC98BlockDataDelegate>
 
+- (void)displayAboutContent;
+- (void)displayNoticeContent;
+
 @end

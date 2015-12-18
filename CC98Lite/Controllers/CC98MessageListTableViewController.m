@@ -14,6 +14,7 @@
 #import "UIViewController+BackButtonHandler.h"
 #import "CC98MessageContentViewController.h"
 #import "CC98EditMessageViewController.h"
+#import "MBProgressHUD.h"
 
 @interface CC98MessageListTableViewController ()
 
@@ -22,6 +23,8 @@
 
 @property (assign, nonatomic) BOOL needScrollToTop;
 @property (assign, nonatomic) CC98TurnPageType turnPageType;
+
+@property (strong, nonatomic) MBProgressHUD *hud;
 
 @end
 
@@ -81,6 +84,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.hud = [[MBProgressHUD alloc] initWithView:self.tableView];
+    [self.tableView addSubview:self.hud];
+    [self.hud hide:YES];
+    
     self.turnPageType = DonotTurnPage;
     self.needScrollToTop = YES;
     
@@ -127,7 +134,11 @@
 }
 
 - (void)updateMessagesInPage:(NSInteger)pageNum {
+    [self.hud show:YES];
+    
     [self.messageBox messagesInPage:pageNum withBlock:^(NSArray *messages, NSError *error) {
+        [self.hud hide:YES];
+        
         if (!error) {
             self.messages = messages;
             [self.tableView reloadData];

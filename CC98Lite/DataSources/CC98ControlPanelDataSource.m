@@ -42,10 +42,14 @@
         CC98AccountListTableViewController *itemAccount = [storyboard instantiateViewControllerWithIdentifier:@"accountList"];
         CC98SettingsTableViewController *itemSettings = [storyboard instantiateViewControllerWithIdentifier:@"settingsList"];
         CC98AboutViewController *itemAbout = [storyboard instantiateViewControllerWithIdentifier:@"aboutText"];
+        [itemAbout displayAboutContent];
+        CC98AboutViewController *itemNotice = [storyboard instantiateViewControllerWithIdentifier:@"aboutText"];
+        [itemNotice displayNoticeContent];
 
         _panelItems = @[
                        @[itemInbox, itemOutbox],
-                       @[itemAccount, itemSettings, itemAbout]
+                       @[itemAccount, itemSettings],
+                       @[itemAbout, itemNotice]
         ];
         
     }

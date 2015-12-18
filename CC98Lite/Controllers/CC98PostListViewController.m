@@ -23,6 +23,7 @@
 #import "CC98EditPostViewController.h"
 #import "CC98EditMessageViewController.h"
 #import "CC98UserProfileTableViewController.h"
+#import "CC98ReportViewController.h"
 #import "CC98GlobalSettings.h"
 #import "RNGridMenu.h"
 #import "CC98User.h"
@@ -42,6 +43,7 @@
 @property (strong, nonatomic) CC98PageOperatingViewController *pageOperatingVC;
 @property (assign, nonatomic) NSInteger currentFloorNum;
 @property (strong, nonatomic) MWPhoto *currentImage;
+@property (strong, nonatomic) MBProgressHUD *hud;
 @property (assign, nonatomic) CC98TurnPageType turnPageType;
 
 @end
@@ -144,6 +146,17 @@
             [self.navigationController pushViewController:viewController animated:YES];
         }
             break;
+        case 3:  // 举报用户
+        {
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
+            CC98ReportViewController *viewController = [storyboard instantiateViewControllerWithIdentifier:@"reportTableView"];
+            
+            CC98Post *post = self.posts[(self.currentFloorNum-1)%10];
+            viewController.personToReport = post.author.name;
+            
+            [self.navigationController pushViewController:viewController animated:YES];
+        }
+            break;
         default:
             break;
     }
@@ -153,7 +166,8 @@
     NSArray *options = @[
                          @"引用回复",
                          @"站内短信",
-                         @"个人资料"
+                         @"个人资料",
+                         @"举报用户"
                          ];
     RNGridMenu *popMenu = [[RNGridMenu alloc] initWithTitles:[options subarrayWithRange:NSMakeRange(0, options.count)]];
     popMenu.delegate = self;
@@ -226,6 +240,10 @@
     // Do any additional setup after loading the view.
     self.turnPageType = DonotTurnPage;
     
+    self.hud = [[MBProgressHUD alloc] initWithView:self.view];
+    [self.view addSubview:self.hud];
+    [self.hud hide:YES];
+    
     self.toolBar.backgroundColor = [UIColor mediumGreyColor];
     self.postList.delegate = self;
     self.postList.dataDetectorTypes = UIDataDetectorTypeNone;
@@ -255,10 +273,12 @@
 
 - (void)setCurrentPageNum:(NSInteger)pageNum {
     // NSAssert(pageNum<=self.topic.numberOfPages && pageNum>=1, @"检测到无效页码输入");
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [self.hud show:YES];
     
     self.pageOperatingVC.currentPageNum = pageNum;
     [self.topic postsInPage:pageNum withBlock:^(NSArray *posts, NSError *error) {
+        [self.hud hide:YES];
+        
         if (!error) {
             self.posts = posts;
             [self displayPosts];
@@ -276,7 +296,6 @@
             }
             self.turnPageType = DonotTurnPage;
         }
-        [hud hide:YES];
     }];
 }
 

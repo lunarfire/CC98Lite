@@ -83,6 +83,7 @@
 		128906CE1B1CBB0200972946 /* CC98BlockListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 128906CD1B1CBB0200972946 /* CC98BlockListTableViewController.m */; };
 		128906D91B1CD9DC00972946 /* CC98BlockListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 128906D81B1CD9DC00972946 /* CC98BlockListTableViewCell.m */; };
 		128B71EF1B12012A00B87B99 /* CC98Client.m in Sources */ = {isa = PBXBuildFile; fileRef = 128B71EE1B12012A00B87B99 /* CC98Client.m */; };
+		128BFED61C21B7EE002D1C9F /* CC98ReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 128BFED51C21B7EE002D1C9F /* CC98ReportViewController.m */; };
 		12923DA71B57DC2900DB67E8 /* CC98AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 12923DA61B57DC2900DB67E8 /* CC98AboutViewController.m */; };
 		1296D4101B89F84E00E358A2 /* SystemUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 1296D40F1B89F84E00E358A2 /* SystemUtility.m */; };
 		1298081C1B2A053D00ACEBD0 /* UIViewController+BackButtonHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 1298081B1B2A053D00ACEBD0 /* UIViewController+BackButtonHandler.m */; };
@@ -252,6 +253,8 @@
 		128906D81B1CD9DC00972946 /* CC98BlockListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CC98BlockListTableViewCell.m; path = Views/CC98BlockListTableViewCell.m; sourceTree = "<group>"; };
 		128B71ED1B12012A00B87B99 /* CC98Client.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CC98Client.h; path = Models/CC98Client.h; sourceTree = "<group>"; };
 		128B71EE1B12012A00B87B99 /* CC98Client.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CC98Client.m; path = Models/CC98Client.m; sourceTree = "<group>"; };
+		128BFED41C21B7EE002D1C9F /* CC98ReportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CC98ReportViewController.h; path = Controllers/CC98ReportViewController.h; sourceTree = "<group>"; };
+		128BFED51C21B7EE002D1C9F /* CC98ReportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CC98ReportViewController.m; path = Controllers/CC98ReportViewController.m; sourceTree = "<group>"; };
 		12923DA51B57DC2900DB67E8 /* CC98AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CC98AboutViewController.h; path = Controllers/CC98AboutViewController.h; sourceTree = "<group>"; };
 		12923DA61B57DC2900DB67E8 /* CC98AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CC98AboutViewController.m; path = Controllers/CC98AboutViewController.m; sourceTree = "<group>"; };
 		1296D40E1B89F84E00E358A2 /* SystemUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SystemUtility.h; path = Utilities/SystemUtility.h; sourceTree = "<group>"; };
@@ -474,6 +477,8 @@
 				125C839F1B4179EF00FF96D5 /* CC98SettingsTableViewController.m */,
 				12923DA51B57DC2900DB67E8 /* CC98AboutViewController.h */,
 				12923DA61B57DC2900DB67E8 /* CC98AboutViewController.m */,
+				128BFED41C21B7EE002D1C9F /* CC98ReportViewController.h */,
+				128BFED51C21B7EE002D1C9F /* CC98ReportViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -639,15 +644,16 @@
 		12564C3E1B11F1A700EC2FB0 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0630;
+				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = zju;
 				TargetAttributes = {
 					12564C451B11F1A700EC2FB0 = {
 						CreatedOnToolsVersion = 6.3.2;
-						DevelopmentTeam = LL4U63W87C;
+						DevelopmentTeam = M2D2QA28AH;
 					};
 					12564C611B11F1A700EC2FB0 = {
 						CreatedOnToolsVersion = 6.3.2;
+						DevelopmentTeam = M2D2QA28AH;
 						TestTargetID = 12564C451B11F1A700EC2FB0;
 					};
 				};
@@ -746,6 +752,7 @@
 				128906CE1B1CBB0200972946 /* CC98BlockListTableViewController.m in Sources */,
 				127495B71B2586C400BD07CE /* CC98RegexRepository.m in Sources */,
 				128906CB1B1CA60A00972946 /* CC98CommonPartition.m in Sources */,
+				128BFED61C21B7EE002D1C9F /* CC98ReportViewController.m in Sources */,
 				1284158F1B1380580043D1F6 /* CC98Topic.m in Sources */,
 				127495AB1B25395C00BD07CE /* NSError+CC98Style.m in Sources */,
 				128906D91B1CD9DC00972946 /* CC98BlockListTableViewCell.m in Sources */,
@@ -869,10 +876,12 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Fang Zhou (5E9882VSK9)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Fang Zhou (5E9882VSK9)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -888,9 +897,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "f912936d-a9bc-4588-8ff0-eeb43f048a2d";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -913,7 +923,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Fang Zhou (M2D2QA28AH)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Fang Zhou (M2D2QA28AH)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -926,9 +937,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				ONLY_ACTIVE_ARCH = NO;
+				PROVISIONING_PROFILE = "f912936d-a9bc-4588-8ff0-eeb43f048a2d";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -940,12 +952,14 @@
 			baseConfigurationReference = 7F1FC99458C58D53D9847F72 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Fang Zhou (5E9882VSK9)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Fang Zhou (5E9882VSK9)";
 				INFOPLIST_FILE = CC98Lite/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.iZJU.MyCC98;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "f912936d-a9bc-4588-8ff0-eeb43f048a2d";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -955,12 +969,14 @@
 			baseConfigurationReference = 958C2F9BFD45764512459F82 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Fang Zhou (M2D2QA28AH)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Fang Zhou (M2D2QA28AH)";
 				INFOPLIST_FILE = CC98Lite/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.iZJU.MyCC98;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "f912936d-a9bc-4588-8ff0-eeb43f048a2d";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
@@ -969,6 +985,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -979,7 +997,9 @@
 				);
 				INFOPLIST_FILE = CC98LiteTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.zju.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CC98Lite.app/CC98Lite";
 			};
 			name = Debug;
@@ -988,13 +1008,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = CC98LiteTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.zju.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CC98Lite.app/CC98Lite";
 			};
 			name = Release;

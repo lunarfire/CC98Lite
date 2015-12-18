@@ -11,7 +11,7 @@
 @implementation NSError (CC98Style)
 
 + (NSString *)cc98ErrorDomain {
-    return @"CC98Lite";
+    return @"MyCC98";
 }
 
 + (instancetype)errorWithCode:(NSInteger)code description:(NSString *)description {

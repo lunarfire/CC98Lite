@@ -21,6 +21,7 @@
 @interface CC98BlockListTableViewController ()
 
 @property (strong, nonatomic) CC98ControlPanelHeaderView *headerView;
+@property (strong, nonatomic) MBProgressHUD *hud;
 
 @end
 
@@ -28,11 +29,11 @@
 
 - (void)swipeForNextPage:(UISwipeGestureRecognizer *)sender {
     if ([self.dataSource hasMultiplePages]) {
-        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [self.hud show:YES];
         
         [self.dataSource loadNextPageWithBlock:^(NSError *error) {
             [self postProcessWithError:error];
-            [hud hide:YES];
+            [self.hud hide:YES];
             
             if (!error) {
                 if ([self.dataSource tableView:self.tableView numberOfRowsInSection:0] > 0) {
@@ -46,11 +47,11 @@
 
 - (void)swipeForPrevPage:(id)sender {
     if ([self.dataSource hasMultiplePages]) {
-        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [self.hud show:YES];
         
         [self.dataSource loadPrevPageWithBlock:^(NSError *error) {
             [self postProcessWithError:error];
-            [hud hide:YES];
+            [self.hud hide:YES];
             
             if (!error) {
                 if ([self.dataSource tableView:self.tableView numberOfRowsInSection:0] > 0) {
@@ -81,11 +82,11 @@
 }
 
 - (void)reload:(__unused id)sender {
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [self.hud show:YES];
 
     [self.dataSource updateWithBlock:^(NSError *error) {
+        [self.hud hide:YES];
         [self postProcessWithError:error];
-        [hud hide:YES];
     }];
 }
 
@@ -96,6 +97,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.hud = [[MBProgressHUD alloc] initWithView:self.tableView];
+    [self.tableView addSubview:self.hud];
+    [self.hud hide:YES];
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self.dataSource;

@@ -26,24 +26,15 @@
     return [NSURL URLWithString:@"http://www.cc98.org/"];
 }
 
-+ (NSURL *)proxyAddress {
-    return [NSURL URLWithString:@"http://www.cc98.org/"];
-}
-
 + (NSString *)addressString {
     return @"www.cc98.org";
 }
 
-+ (NSString *)proxyAddressString {
-    return @"www.cc98.org";
-}
-
 + (NSString *)serviceName {
-    return @"CC98Lite";
+    return @"MyCC98";
 }
 
 static CC98Client *sharedCC98Client = nil;
-static CC98Client *backupSharedCC98Client = nil;
 
 + (CC98Client *)sharedInstance {
     @synchronized(self) {
@@ -57,20 +48,13 @@ static CC98Client *backupSharedCC98Client = nil;
     return sharedCC98Client;
 }
 
-+ (void)useProxy {
-    static dispatch_once_t pred;
-    dispatch_once(&pred, ^{
-        NSAssert(sharedCC98Client != nil, @"该函数调用前必须保证sharedInstance()被调用过");
-        backupSharedCC98Client = sharedCC98Client;
-        
-        sharedCC98Client = [[CC98Client alloc] initWithBaseURL:[CC98Client proxyAddress]];
-        sharedCC98Client.requestSerializer = [AFHTTPRequestSerializer serializer];
-        sharedCC98Client.responseSerializer = [AFHTTPResponseSerializer serializer];
-    });
-}
-
-+ (void)useCampusNet {
-    sharedCC98Client = backupSharedCC98Client;
++ (void)useProxyWithAddress:(NSString *)proxyAddress {
+    sharedCC98Client = [CC98Client sharedInstance];
+    NSString *urlAddress = [NSString stringWithFormat:@"http://%@/", proxyAddress];
+    
+    sharedCC98Client = [[CC98Client alloc] initWithBaseURL:[NSURL URLWithString:urlAddress]];
+    sharedCC98Client.requestSerializer = [AFHTTPRequestSerializer serializer];
+    sharedCC98Client.responseSerializer = [AFHTTPResponseSerializer serializer];
 }
 
 - (NSString *)keyForCurrentAccount {

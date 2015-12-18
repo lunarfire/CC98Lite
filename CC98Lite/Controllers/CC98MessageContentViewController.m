@@ -15,6 +15,7 @@
 #import "SystemUtility.h"
 #import "NSError+CC98Style.h"
 #import "NSString+CC98Style.h"
+#import "MBProgressHUD.h"
 
 @interface CC98MessageContentViewController () <CC98BarButtonItemDelegate, UIWebViewDelegate>
 @property (weak, nonatomic) IBOutlet UIWebView *messageContent;
@@ -22,6 +23,7 @@
 @property (weak, nonatomic) IBOutlet CC98BarButtonItem *deleteButton;
 @property (weak, nonatomic) IBOutlet CC98BarButtonItem *replyButton;
 @property (weak, nonatomic) IBOutlet CC98BarButtonItem *writeButton;
+@property (strong, nonatomic) MBProgressHUD *hud;
 
 @end
 
@@ -32,7 +34,9 @@
         CC98Message *prevMessage = [[CC98Message alloc] init];
         prevMessage.address = self.message.prevMessageAddress;
 
+        [self.hud show:YES];
         [prevMessage contentWithBlock:^(NSError *error) {
+            [self.hud hide:YES];
             if (!error) {
                 self.message = prevMessage;
                 [self displayMessageContent];
@@ -55,7 +59,9 @@
         CC98Message *nextMessage = [[CC98Message alloc] init];
         nextMessage.address = self.message.nextMessageAddress;
         
+        [self.hud show:YES];
         [nextMessage contentWithBlock:^(NSError *error) {
+            [self.hud hide:YES];
             if (!error) {
                 self.message = nextMessage;
                 [self displayMessageContent];
@@ -77,6 +83,10 @@
     [super viewDidLoad];
     self.tabBarController.tabBar.hidden = YES;
     
+    self.hud = [[MBProgressHUD alloc] initWithView:self.view];
+    [self.view addSubview:self.hud];
+    [self.hud hide:YES];
+    
     self.messageToolBar.backgroundColor = [UIColor mediumGreyColor];
     self.messageContent.dataDetectorTypes = UIDataDetectorTypeNone;
     self.messageContent.delegate = self;
@@ -94,7 +104,9 @@
 }
 
 - (void)loadMessageContent {
+    [self.hud show:YES];
     [self.message contentWithBlock:^(NSError *error) {
+        [self.hud hide:YES];
         if (!error) {
             [self displayMessageContent];
             //self.navigationItem.title = @"短消息";
@@ -116,7 +128,9 @@
 }
 
 - (void)deleteMessage {
+    [self.hud show:YES];
     [self.message deleteWithBlock:^(NSError *error) {
+        [self.hud hide:YES];
         if (!error) {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
                                                             message:@"删除成功"

@@ -18,15 +18,11 @@
 
 + (CC98Client *)sharedInstance;
 
-+ (void)useProxy;
-+ (void)useCampusNet;
-
 + (NSURL *)address;
-+ (NSURL *)proxyAddress;
-+ (NSString *)serviceName;
-
 + (NSString *)addressString;
-+ (NSString *)proxyAddressString;
+
++ (void)useProxyWithAddress:(NSString *)proxyAddress;
++ (NSString *)serviceName;
 
 - (BOOL)hasLoggedIn;
 

@@ -36,7 +36,10 @@
 - (instancetype)initWithStoredInformationUsingUsername:(NSString *)name {
     if (self = [super init]) {
         self.name = [name trim];
-        [self retrievePasswordSafely];
+        
+        if (![self retrievePasswordSafely]) {
+            self = nil;
+        }
     }
     return self;
 }
@@ -148,7 +151,7 @@
     [STKeychain storeUsername:usernameFor32 andPassword:passwordFor32 forServiceName:serviceName updateExisting:YES error:NULL];
 }
 
-- (void)retrievePasswordSafely {
+- (BOOL)retrievePasswordSafely {
     NSString *usernameFor16 = [NSString stringWithFormat:@"%@_16", self.name];
     NSString *usernameFor32 = [NSString stringWithFormat:@"%@_32", self.name];
     
@@ -156,6 +159,12 @@
     
     self.passwd_md5_16 = [STKeychain getPasswordForUsername:usernameFor16 andServiceName:serviceName error:NULL];
     self.passwd_md5_32 = [STKeychain getPasswordForUsername:usernameFor32 andServiceName:serviceName error:NULL];
+    
+    if (self.passwd_md5_16 == nil || self.passwd_md5_32 == nil) {
+        return NO;
+    } else {
+        return YES;
+    }
 }
 
 @end

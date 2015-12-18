@@ -49,7 +49,7 @@ static const NSUInteger PERSONAL_BOARDS_INDEX_IN_TAB_BAR = 0;
     [self insertHotTopicListInTabBar];
     [self insertControlPanelInTabBar];
     
-    [self checkNetworkStatus:[CC98Client addressString]];
+    [self checkNetworkStatus];
     return YES;
 }
 
@@ -64,6 +64,15 @@ static const NSUInteger PERSONAL_BOARDS_INDEX_IN_TAB_BAR = 0;
 
 - (void)showReachabilityDialog {
     switch (self.hostReachability.currentReachabilityStatus) {
+        case NotReachable:  // 目前只在网络不可用时进行提示
+            [self showInfoDialog:@"当前网络不可用，请检查网络连接"];
+            break;
+        default:
+            break;
+    }
+    
+    /*
+    switch (self.hostReachability.currentReachabilityStatus) {
         case NotReachable:
             [self showInfoDialog:@"无法访问CC98"];
             break;
@@ -76,6 +85,7 @@ static const NSUInteger PERSONAL_BOARDS_INDEX_IN_TAB_BAR = 0;
         default:
             break;
     }
+    */
 }
 
 - (void)subscribeNetworkingNotification {
@@ -92,7 +102,25 @@ static const NSUInteger PERSONAL_BOARDS_INDEX_IN_TAB_BAR = 0;
     [[[CC98Client sharedInstance] requestSerializer] didChangeValueForKey:@"timeoutInterval"];
 }
 
-- (void)checkNetworkStatus:(NSString *)address {
+- (void)checkNetworkStatus {
+    self.hostReachability = [Reachability reachabilityForInternetConnection];
+    
+    if (self.hostReachability.currentReachabilityStatus == NotReachable) {
+        [self showReachabilityDialog];
+    } else {
+        CC98Account *account = [[CC98Client sharedInstance] currentAccount];
+        if (account == nil) {
+            UITabBarController *tabBarController = (UITabBarController *)self.window.rootViewController;
+            tabBarController.selectedIndex = 2;
+        } else {
+            [account loginWithBlock:nil];
+        }
+    }
+    
+    // 订阅网络状态变化的通知
+    [self subscribeNetworkingNotification];
+
+    /*
     self.hostReachability = [Reachability reachabilityWithHostName:address];
     
     if (self.hostReachability.currentReachabilityStatus == NotReachable) {
@@ -128,6 +156,7 @@ static const NSUInteger PERSONAL_BOARDS_INDEX_IN_TAB_BAR = 0;
             [weakSelf setNetworkingTimeoutInterval:defaultTimeoutInterval];
         }];
     }];
+    */
 }
 
 - (void)reachabilityChanged:(NSNotification *)note
