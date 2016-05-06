@@ -52,7 +52,9 @@ static CC98Forum *sharedCC98Forum = nil;
             partition.numberOfBoards = [[match firstMatchRegex:PARTITION_BOARDS_NUM_REGEX] integerValue];
             partition.identifier = [match firstMatchRegex:PARTITION_ID_REGEX];
             
-            [tempPartitions addObject:partition];
+            if (partition.name != nil) {
+                [tempPartitions addObject:partition];
+            }
         }
         if (block) { block([NSArray arrayWithArray:tempPartitions], nil); }
         

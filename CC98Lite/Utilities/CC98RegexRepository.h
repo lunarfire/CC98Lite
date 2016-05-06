@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#define PARTITION_WRAPPER_REGEX @"<td class=\"tablebody1 td-border-1\"(.|\\r|\\n|\\t)*?</span></td>"
+#define PARTITION_WRAPPER_REGEX @"<td class=\"tablebody1 td-border-1\"(.|\\r|\\n|\\t)*?</td>"
 #define PARTITION_NAME_REGEX @"(?<=color: #000066;\">).*?(?=</span>)"
 #define PARTITION_BOARDS_NUM_REGEX @"(?<=个下属论坛\">)\\d{1,3}(?=</span>)"
 #define PARTITION_ID_REGEX @"(?<=<a href=\"list.asp\\?boardid=)[0-9]+(?=\">)"
